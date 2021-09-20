@@ -15,7 +15,7 @@ def prompt():
         A[verage]: <number>
         I[nfo]
         Q[uit]''')
-
+    request = input("Request: ")
 
 if __name__ == '__main__':
     main()
