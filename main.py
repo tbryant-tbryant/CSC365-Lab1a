@@ -3,8 +3,11 @@ def main():
         f = open("students.txt", "r")
     except(FileNotFoundError):
         print("No file 'students.txt' found.")
-    prompt()
 
+def initiatePrompt():
+    req = prompt()
+    while (req is not "S" or "T" or "B"):
+        req = prompt()
 
 def prompt():
     print('''Commands:
@@ -16,6 +19,7 @@ def prompt():
         I[nfo]
         Q[uit]''')
     request = input("Request: ")
+    return request
 
 if __name__ == '__main__':
     main()
