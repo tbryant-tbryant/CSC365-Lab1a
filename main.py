@@ -3,10 +3,10 @@ def main():
         f = open("students.txt", "r")
     except(FileNotFoundError):
         print("No file 'students.txt' found.")
-    formatData()
+    formatData(f)
     initiatePrompt()
 
-table = {}
+table = set([])
 STUDENT_LAST = 0  # STRING
 STUDENT_FIRST = 1  # STRING
 GRADE = 2  # INT
@@ -22,13 +22,13 @@ def formatData(file):
 
 def initiatePrompt():
     req = prompt()
-    while (req != "I" and req != "Info" and
-           req != "Q" and req != "Quit" and
-           req != "A" and req[:8] != "Average" and
-           req != "G" and req[:6] != "Grade" and
-           req != "B" and req[:4] != "Bus" and
-           req != "T" and req[:8] != "Teacher" and
-           req != "S" and req[:8] != "Student"):
+    while (req != "I" and req != "Info:" and
+           req != "Q" and req != "Quit:" and
+           req != "A:" and req[:9] != "Average:" and
+           req != "G:" and req[:7] != "Grade:" and
+           req != "B:" and req[:5] != "Bus:" and
+           req != "T:" and req[:9] != "Teacher:" and
+           req != "S:" and req[:9] != "Student:"):
         req = prompt()
 
 def getStudents(table, last_name, bus_route):
