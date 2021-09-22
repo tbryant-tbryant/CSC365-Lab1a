@@ -3,10 +3,17 @@ def main():
         f = open("students.txt", "r")
     except(FileNotFoundError):
         print("No file 'students.txt' found.")
+    initiatePrompt()
 
 def initiatePrompt():
     req = prompt()
-    while (req is not "S" or "T" or "B"):
+    while (req != "I" and req != "Info" and
+           req != "Q" and req != "Quit" and
+           req != "A" and req[:8] != "Average" and
+           req != "G" and req[:6] != "Grade" and
+           req != "B" and req[:4] != "Bus" and
+           req != "T" and req[:8] != "Teacher" and
+           req != "S" and req[:8] != "Student"):
         req = prompt()
 
 def prompt():
