@@ -3,7 +3,6 @@ def main():
         f = open("students.txt", "r")
     except(FileNotFoundError):
         print("No file 'students.txt' found.")
-    formatData(f)
     prompt()
 
 
