@@ -3,8 +3,18 @@ def main():
         f = open("students.txt", "r")
     except(FileNotFoundError):
         print("No file 'students.txt' found.")
-    prompt()
+    initiatePrompt()
 
+def initiatePrompt():
+    req = prompt()
+    while (req != "I" and req != "Info" and
+           req != "Q" and req != "Quit" and
+           req != "A" and req[:8] != "Average" and
+           req != "G" and req[:6] != "Grade" and
+           req != "B" and req[:4] != "Bus" and
+           req != "T" and req[:8] != "Teacher" and
+           req != "S" and req[:8] != "Student"):
+        req = prompt()
 
 table = {}
 STUDENT_LAST = 0  # STRING
@@ -37,6 +47,7 @@ def prompt():
         I[nfo]
         Q[uit]''')
     request = input("Request: ")
+    return request
 
 
 if __name__ == '__main__':
