@@ -18,23 +18,101 @@ TEACHER_FIRST = 7  # STRING
 
 def formatData(file):
     for line in file.readlines():
-        table.append(tuple(line.split(",")))    
+        table.append(tuple(line.split(",")))
+
+def parseInput(request):
+    pair = request.split(":")
+    if pair[1] == "":
+        if pair[0] == "I" or pair[0] == "Info":
+            info()
+        elif pair[0] == "Q" or pair[0] == "Quit":
+            q()
 
 def initiatePrompt():
     req = prompt()
-    while (req != "I" and req != "Info:" and
-           req != "Q" and req != "Quit:" and
+    while (req != "I" and req != "Info" and
+           req != "Q" and req != "Quit" and
            req != "A:" and req[:9] != "Average:" and
            req != "G:" and req[:7] != "Grade:" and
            req != "B:" and req[:5] != "Bus:" and
            req != "T:" and req[:9] != "Teacher:" and
            req != "S:" and req[:9] != "Student:"):
         req = prompt()
+    parseInput(req)
 
-def getStudents(table, last_name, bus_route):
+def student(table, last_name):
+    for tup in table:
+        if tup[STUDENT_LAST].upper() == last_name.upper():
+            print(tup[STUDENT_LAST],
+                  tup[STUDENT_FIRST],
+                  tup[GRADE],
+                  tup[CLASSROOM],
+                  tup[TEACHER_LAST],
+                  tup[TEACHER_FIRST])
+
+def student_bus(table, last_name, bus_route):
     for tup in table:
         if tup[STUDENT_LAST].upper() == last_name.upper() and tup[BUS] == bus_route:
-            print(tup[STUDENT_LAST], tup[STUDENT_FIRST], tup[BUS])
+            print(tup[STUDENT_LAST],
+                  tup[STUDENT_FIRST],
+                  tup[BUS])
+
+def teacher(table, last_name):
+    for tup in table:
+        if tup[TEACHER_LAST].upper() == last_name.upper():
+            print(tup[STUDENT_LAST],
+                  tup[STUDENT_FIRST])
+
+def grade(table, last_name):
+    for tup in table:
+        if tup[TEACHER_LAST].upper() == last_name.upper():
+            print(tup[STUDENT_LAST],
+                  tup[STUDENT_FIRST])
+
+def bus(table, bus_route):
+    for tup in table:
+        if tup[BUS] == bus_route:
+            print(tup[STUDENT_LAST],
+                  tup[STUDENT_FIRST],
+                  tup[GRADE],
+                  tup[CLASSROOM])
+
+def grade_high(table, grade):
+    highest = ()
+    highest_gpa = 0.0
+    for tup in table:
+        if tup[GRADE] == grade:
+            if tup[GPA] > highest_gpa:
+                highest = tup
+    print(tup[STUDENT_LAST],
+        tup[STUDENT_FIRST],
+        tup[GPA],
+        tup[TEACHER_LAST],
+        tup[TEACHER_FIRST],
+        tup[BUS])
+
+def grade_low(table, grade):
+    lowest = ()
+    lowest_gpa = 10.0
+    for tup in table:
+        if tup[GRADE] == grade:
+            if tup[GPA] < lowest_gpa:
+                lowest = tup
+    print(tup[STUDENT_LAST],
+          tup[STUDENT_FIRST],
+          tup[GPA],
+          tup[TEACHER_LAST],
+          tup[TEACHER_FIRST],
+          tup[BUS])
+
+def average(table, grade):
+    total = 0.0
+    num = 0
+    for tup in table:
+        if tup[GRADE] == grade:
+            total += tup[GPA]
+            num += 1
+    #fix
 
 def prompt():
     print('''Commands:
