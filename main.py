@@ -18,11 +18,11 @@ TEACHER_FIRST = 7  # STRING
 
 def formatData(file):
     for line in file.readlines():
-        table.append(tuple(line.split(",")))
+        table.add(tuple(line.split(",")))
 
 def parseInput(request):
     pair = request.split(":")
-    if pair[1] == "":
+    if len(pair) == 1:
         if pair[0] == "I" or pair[0] == "Info":
             info()
         elif pair[0] == "Q" or pair[0] == "Quit":
@@ -38,6 +38,10 @@ def initiatePrompt():
            req != "T:" and req[:9] != "Teacher:" and
            req != "S:" and req[:9] != "Student:"):
         req = prompt()
+        if (req == "Q" or req == "Quit"):
+            print("Makes it here\n")
+            quit()
+    print(req + '\n')
     parseInput(req)
 
 def student(table, last_name):
