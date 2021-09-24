@@ -83,13 +83,15 @@ def grade_high(table, grade):
     for tup in table:
         if tup[GRADE] == grade:
             if tup[GPA] > highest_gpa:
-                highest = tup
-    print(tup[STUDENT_LAST],
-        tup[STUDENT_FIRST],
-        tup[GPA],
-        tup[TEACHER_LAST],
-        tup[TEACHER_FIRST],
-        tup[BUS])
+                highest_gpa = tup[GPA]
+    for tup in table:
+        if tup[GRADE] == grade and tup[GPA] == highest_gpa:
+            print(highest[STUDENT_LAST],
+                  highest[STUDENT_FIRST],
+                  highest[GPA],
+                  highest[TEACHER_LAST],
+                  highest[TEACHER_FIRST],
+                  highest[BUS])
 
 def grade_low(table, grade):
     lowest = ()
@@ -97,13 +99,15 @@ def grade_low(table, grade):
     for tup in table:
         if tup[GRADE] == grade:
             if tup[GPA] < lowest_gpa:
-                lowest = tup
-    print(tup[STUDENT_LAST],
-          tup[STUDENT_FIRST],
-          tup[GPA],
-          tup[TEACHER_LAST],
-          tup[TEACHER_FIRST],
-          tup[BUS])
+                lowest_gpa = tup[GPA]
+    for tup in table:
+        if tup[GRADE] == grade and tup[GPA] == lowest_gpa:
+            print(lowest[STUDENT_LAST],
+                  lowest[STUDENT_FIRST],
+                  lowest[GPA],
+                  lowest[TEACHER_LAST],
+                  lowest[TEACHER_FIRST],
+                  lowest[BUS])
 
 def average(table, grade):
     total = 0.0
@@ -112,7 +116,8 @@ def average(table, grade):
         if tup[GRADE] == grade:
             total += tup[GPA]
             num += 1
-    #fix
+    if num != 0:
+        print(grade, total / num)
 
 def prompt():
     print('''Commands:
