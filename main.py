@@ -22,6 +22,22 @@ def formatData(file):
 
 def parseInput(request):
     pair = request.split(":")
+    if len(pair) > 1:
+       if pair[0] == "Student" or pair[0] == "S":
+           #studentHelper(pair)
+           a = 0
+       if pair[0] == "Teacher" or pair[0] == "T":
+           teacher(table, pair[1])
+       if pair[0] == "Bus" or pair[0] == "B":
+           bus(table, pair[1])
+       if pair[0] == "Grade" or pair[0] == "G":
+           #gradeHelper(pair)
+           a = 0
+       if pair[0] == "Average" or pair[0] == "A":
+           average(table, pair[1])
+
+def studentHelper(tup):
+    a = 0
 
 def initiatePrompt():
     req = prompt()
