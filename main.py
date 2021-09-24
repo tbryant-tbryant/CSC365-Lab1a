@@ -38,9 +38,8 @@ def initiatePrompt():
            req != "T:" and req[:9] != "Teacher:" and
            req != "S:" and req[:9] != "Student:"):
         req = prompt()
-        if (req == "Q" or req == "Quit"):
-            print("Makes it here\n")
-            quit()
+    if (req == "Q" or req == "Quit"):
+        quit()
     print(req + '\n')
     parseInput(req)
 
