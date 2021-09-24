@@ -18,7 +18,7 @@ TEACHER_FIRST = 7  # STRING
 
 def formatData(file):
     for line in file.readlines():
-        table.add(tuple(line.split(",")))
+        table.add(tuple([item.strip() for item in line.split(",")]))
 
 def parseInput(request):
     pair = request.split(":")
