@@ -22,22 +22,21 @@ def formatData(file):
 
 def parseInput(request):
     pair = request.split(":")
-    if len(pair) == 1:
-        if pair[0] == "I" or pair[0] == "Info":
-            info(table)
 
 def initiatePrompt():
     req = prompt()
     while (req != "I" and req != "Info" and
            req != "Q" and req != "Quit" and
-           req != "A:" and req[:9] != "Average:" and
-           req != "G:" and req[:7] != "Grade:" and
-           req != "B:" and req[:5] != "Bus:" and
-           req != "T:" and req[:9] != "Teacher:" and
-           req != "S:" and req[:9] != "Student:"):
+           req[:2] == "A:" and req[:9] != "Average:" and
+           req[:2] == "G:" and req[:7] != "Grade:" and
+           req[:2] == "B:" and req[:5] != "Bus:" and
+           req[:2] == "T:" and req[:9] != "Teacher:" and
+           req[:2] == "S:" and req[:9] != "Student:"):
         req = prompt()
     if (req == "Q" or req == "Quit"):
         quit()
+    elif (req == "I" or req == "Info"):
+        info(table)
     #print(req + '\n')
     parseInput(req)
 
