@@ -25,6 +25,7 @@ def parseInput(request):
     if len(pair) > 1:
        if pair[0] == "Student" or pair[0] == "S":
            #studentHelper(pair)
+           print("makes it here\n")
            a = 0
        if pair[0] == "Teacher" or pair[0] == "T":
            teacher(table, pair[1])
@@ -43,11 +44,11 @@ def initiatePrompt():
     req = prompt()
     while (req != "I" and req != "Info" and
            req != "Q" and req != "Quit" and
-           req[:2] == "A:" and req[:9] != "Average:" and
-           req[:2] == "G:" and req[:7] != "Grade:" and
-           req[:2] == "B:" and req[:5] != "Bus:" and
-           req[:2] == "T:" and req[:9] != "Teacher:" and
-           req[:2] == "S:" and req[:9] != "Student:"):
+           req[:3] != "A: " and req[:9] != "Average: " and
+           req[:3] != "G: " and req[:7] != "Grade: " and
+           req[:3] != "B: " and req[:5] != "Bus: " and
+           req[:3] != "T: " and req[:9] != "Teacher: " and
+           req[:3] != "S: " and req[:9] != "Student: "):
         req = prompt()
     if (req == "Q" or req == "Quit"):
         quit()
