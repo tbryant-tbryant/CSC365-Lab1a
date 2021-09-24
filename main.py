@@ -122,6 +122,14 @@ def average(table, grade):
     if num != 0:
         print(grade, total / num)
 
+def info(table):
+    for i in range(7):
+        total = 0
+        for tup in table:
+            if tup[GRADE] == i:
+                total += 1
+        print(str(i) + ":", str(total))
+
 def prompt():
     print('''Commands:
         S[tudent]: <lastname> [B[us]]
