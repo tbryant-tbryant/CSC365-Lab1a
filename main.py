@@ -24,9 +24,7 @@ def parseInput(request):
     pair = request.split(":")
     if len(pair) == 1:
         if pair[0] == "I" or pair[0] == "Info":
-            info()
-        elif pair[0] == "Q" or pair[0] == "Quit":
-            q()
+            info(table)
 
 def initiatePrompt():
     req = prompt()
@@ -40,7 +38,7 @@ def initiatePrompt():
         req = prompt()
     if (req == "Q" or req == "Quit"):
         quit()
-    print(req + '\n')
+    #print(req + '\n')
     parseInput(req)
 
 def student(table, last_name):
@@ -126,7 +124,9 @@ def info(table):
     for i in range(7):
         total = 0
         for tup in table:
-            if tup[GRADE] == i:
+            #print("Makes it here too\n")
+            if tup[GRADE] == str(i):
+                #print("Makes it here\n")
                 total += 1
         print(str(i) + ":", str(total))
 
