@@ -43,7 +43,7 @@ def studentHelper(tup, tableset):
     if len(tup) == 1:
         student(tableset, tup[0])
     elif len(tup) == 2:
-        student_bus(tableset, tup[0], int(tup[1]))
+        student_bus(tableset, tup[0])
 
 
 def gradeHelper(tup, tableset):
@@ -52,6 +52,8 @@ def gradeHelper(tup, tableset):
             grade_high(tableset, int(tup[0]))
         elif tup[1] == "L" or tup[1] == "Low":
             grade_low(tableset, int(tup[0]))
+    else:
+        grade(tableset, tup[0])
 
 
 def initiatePrompt(tableset):
@@ -80,14 +82,16 @@ def student(table, last_name):
                   tup[CLASSROOM],
                   tup[TEACHER_LAST],
                   tup[TEACHER_FIRST])
+    initiatePrompt(table)
 
 
-def student_bus(table, last_name, bus_route):
+def student_bus(table, last_name):
     for tup in table:
-        if tup[STUDENT_LAST].upper() == last_name.upper() and int(tup[BUS]) == bus_route:
+        if tup[STUDENT_LAST].upper() == last_name.upper():
             print(tup[STUDENT_LAST],
                   tup[STUDENT_FIRST],
                   tup[BUS])
+    initiatePrompt(table)
 
 
 def teacher(table, last_name):
@@ -95,13 +99,15 @@ def teacher(table, last_name):
         if tup[TEACHER_LAST].upper() == last_name.upper():
             print(tup[STUDENT_LAST],
                   tup[STUDENT_FIRST])
+    initiatePrompt(table)
 
 
-def grade(table, last_name):
+def grade(table, grade):
     for tup in table:
-        if tup[TEACHER_LAST].upper() == last_name.upper():
+        if tup[GRADE] == grade:
             print(tup[STUDENT_LAST],
                   tup[STUDENT_FIRST])
+    initiatePrompt(table)
 
 
 def bus(table, bus_route):
@@ -111,6 +117,7 @@ def bus(table, bus_route):
                   tup[STUDENT_FIRST],
                   tup[GRADE],
                   tup[CLASSROOM])
+    initiatePrompt(table)
 
 
 def grade_high(table, grade):
@@ -127,6 +134,7 @@ def grade_high(table, grade):
                   tup[TEACHER_LAST],
                   tup[TEACHER_FIRST],
                   tup[BUS])
+    initiatePrompt(table)
 
 
 def grade_low(table, grade):
@@ -143,6 +151,7 @@ def grade_low(table, grade):
                   tup[TEACHER_LAST],
                   tup[TEACHER_FIRST],
                   tup[BUS])
+    initiatePrompt(table)
 
 
 def average(table, grade):
@@ -154,6 +163,7 @@ def average(table, grade):
             num += 1
     if num != 0:
         print(grade, total / num)
+    initiatePrompt(table)
 
 
 def info(table):
@@ -163,16 +173,7 @@ def info(table):
             if int(tup[GRADE]) == i:
                 total += 1
         print(str(i) + ":", str(total))
-
-
-def info(table):
-    for i in range(7):
-        total = 0
-        for tup in table:
-            if int(tup[GRADE]) == i:
-                total += 1
-        print(str(i) + ":", str(total))
-
+    initiatePrompt(table)
 
 def prompt():
     print('''Commands:
