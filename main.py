@@ -3,10 +3,10 @@ def main():
         f = open("students.txt", "r")
     except(FileNotFoundError):
         print("No file 'students.txt' found.")
-    formatData(f)
-    initiatePrompt()
+    tableset = formatData(f)
+    initiatePrompt(tableset)
 
-table = set([])
+
 STUDENT_LAST = 0  # STRING
 STUDENT_FIRST = 1  # STRING
 GRADE = 2  # INT
@@ -16,31 +16,45 @@ GPA = 5  # FLOAT
 TEACHER_LAST = 6  # STRING
 TEACHER_FIRST = 7  # STRING
 
+
 def formatData(file):
+    tableset = set([])
     for line in file.readlines():
-        table.add(tuple([item.strip() for item in line.split(",")]))
+        tableset.add(tuple([item.strip() for item in line.split(",")]))
+    return tableset
 
-def parseInput(request):
-    pair = request.split(":")
+
+def parseInput(request, tableset):
+    pair = tuple([item.strip() for item in request.split(":")])
     if len(pair) > 1:
-       if pair[0] == "Student" or pair[0] == "S":
-           #studentHelper(pair)
-           print("makes it here\n")
-           a = 0
-       if pair[0] == "Teacher" or pair[0] == "T":
-           teacher(table, pair[1])
-       if pair[0] == "Bus" or pair[0] == "B":
-           bus(table, pair[1])
-       if pair[0] == "Grade" or pair[0] == "G":
-           #gradeHelper(pair)
-           a = 0
-       if pair[0] == "Average" or pair[0] == "A":
-           average(table, pair[1])
+        if pair[0] == "Student" or pair[0] == "S":
+            studentHelper([item.strip() for item in pair[1].split(" ")], tableset)
+        if pair[0] == "Teacher" or pair[0] == "T":
+            teacher(tableset, pair[1])
+        if pair[0] == "Bus" or pair[0] == "B":
+            bus(tableset, int(pair[1]))
+        if pair[0] == "Grade" or pair[0] == "G":
+            gradeHelper([item.strip() for item in pair[1].split(" ")], tableset)
+        if pair[0] == "Average" or pair[0] == "A":
+            average(tableset, int(pair[1]))
 
-def studentHelper(tup):
-    a = 0
 
-def initiatePrompt():
+def studentHelper(tup, tableset):
+    if len(tup) == 1:
+        student(tableset, tup[0])
+    elif len(tup) == 2:
+        student_bus(tableset, tup[0], int(tup[1]))
+
+
+def gradeHelper(tup, tableset):
+    if len(tup) == 2:
+        if tup[1] == "H" or tup[1] == "High":
+            grade_high(tableset, int(tup[0]))
+        elif tup[1] == "L" or tup[1] == "Low":
+            grade_low(tableset, int(tup[0]))
+
+
+def initiatePrompt(tableset):
     req = prompt()
     while (req != "I" and req != "Info" and
            req != "Q" and req != "Quit" and
@@ -50,12 +64,12 @@ def initiatePrompt():
            req[:3] != "T: " and req[:9] != "Teacher: " and
            req[:3] != "S: " and req[:9] != "Student: "):
         req = prompt()
-    if (req == "Q" or req == "Quit"):
+    if req == "Q" or req == "Quit":
         quit()
-    elif (req == "I" or req == "Info"):
-        info(table)
-    #print(req + '\n')
-    parseInput(req)
+    elif req == "I" or req == "Info":
+        info(tableset)
+    parseInput(req, tableset)
+
 
 def student(table, last_name):
     for tup in table:
@@ -67,12 +81,14 @@ def student(table, last_name):
                   tup[TEACHER_LAST],
                   tup[TEACHER_FIRST])
 
+
 def student_bus(table, last_name, bus_route):
     for tup in table:
-        if tup[STUDENT_LAST].upper() == last_name.upper() and tup[BUS] == bus_route:
+        if tup[STUDENT_LAST].upper() == last_name.upper() and int(tup[BUS]) == bus_route:
             print(tup[STUDENT_LAST],
                   tup[STUDENT_FIRST],
                   tup[BUS])
+
 
 def teacher(table, last_name):
     for tup in table:
@@ -80,71 +96,83 @@ def teacher(table, last_name):
             print(tup[STUDENT_LAST],
                   tup[STUDENT_FIRST])
 
+
 def grade(table, last_name):
     for tup in table:
         if tup[TEACHER_LAST].upper() == last_name.upper():
             print(tup[STUDENT_LAST],
                   tup[STUDENT_FIRST])
 
+
 def bus(table, bus_route):
     for tup in table:
-        if tup[BUS] == bus_route:
+        if int(tup[BUS]) == bus_route:
             print(tup[STUDENT_LAST],
                   tup[STUDENT_FIRST],
                   tup[GRADE],
                   tup[CLASSROOM])
 
+
 def grade_high(table, grade):
-    highest = ()
     highest_gpa = 0.0
     for tup in table:
-        if tup[GRADE] == grade:
-            if tup[GPA] > highest_gpa:
-                highest_gpa = tup[GPA]
+        if int(tup[GRADE]) == grade:
+            if float(tup[GPA]) > highest_gpa:
+                highest_gpa = float(tup[GPA])
     for tup in table:
-        if tup[GRADE] == grade and tup[GPA] == highest_gpa:
-            print(highest[STUDENT_LAST],
-                  highest[STUDENT_FIRST],
-                  highest[GPA],
-                  highest[TEACHER_LAST],
-                  highest[TEACHER_FIRST],
-                  highest[BUS])
+        if int(tup[GRADE]) == grade and float(tup[GPA]) == highest_gpa:
+            print(tup[STUDENT_LAST],
+                  tup[STUDENT_FIRST],
+                  tup[GPA],
+                  tup[TEACHER_LAST],
+                  tup[TEACHER_FIRST],
+                  tup[BUS])
+
 
 def grade_low(table, grade):
-    lowest = ()
     lowest_gpa = 10.0
     for tup in table:
-        if tup[GRADE] == grade:
-            if tup[GPA] < lowest_gpa:
-                lowest_gpa = tup[GPA]
+        if int(tup[GRADE]) == grade:
+            if float(tup[GPA]) < lowest_gpa:
+                lowest_gpa = float(tup[GPA])
     for tup in table:
-        if tup[GRADE] == grade and tup[GPA] == lowest_gpa:
-            print(lowest[STUDENT_LAST],
-                  lowest[STUDENT_FIRST],
-                  lowest[GPA],
-                  lowest[TEACHER_LAST],
-                  lowest[TEACHER_FIRST],
-                  lowest[BUS])
+        if int(tup[GRADE]) == grade and float(tup[GPA]) == lowest_gpa:
+            print(tup[STUDENT_LAST],
+                  tup[STUDENT_FIRST],
+                  tup[GPA],
+                  tup[TEACHER_LAST],
+                  tup[TEACHER_FIRST],
+                  tup[BUS])
+
 
 def average(table, grade):
     total = 0.0
     num = 0
     for tup in table:
-        if tup[GRADE] == grade:
-            total += tup[GPA]
+        if int(tup[GRADE]) == grade:
+            total += float(tup[GPA])
             num += 1
     if num != 0:
         print(grade, total / num)
+
 
 def info(table):
     for i in range(7):
         total = 0
         for tup in table:
-            #print("Makes it here too\n")
-            if tup[GRADE] == str(i):
-                #print("Makes it here\n")
+            if int(tup[GRADE]) == i:
                 total += 1
         print(str(i) + ":", str(total))
+
+
+def info(table):
+    for i in range(7):
+        total = 0
+        for tup in table:
+            if int(tup[GRADE]) == i:
+                total += 1
+        print(str(i) + ":", str(total))
+
 
 def prompt():
     print('''Commands:
