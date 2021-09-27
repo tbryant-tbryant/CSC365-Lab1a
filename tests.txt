@@ -1,0 +1,188 @@
+// CSC 365
+// Lab 1-a test suite
+
+// TC-1
+// Tests Requirements R3, R4
+// short form command name, existing student
+// expected output: EARLY TORY 3 107 FAFARD ROCIO
+
+S: EARLY
+
+// TC-2
+// Tests Requirements R3, R4
+// long form command name, non-existing student
+// expected output: <nothing>
+
+STUDENT: CUMBERBATCH
+
+// TC-3
+// Tests Requirements R3, R5
+// short form command name, short form bus option (B), existing student
+// expected output: EARLY TORY 52
+
+S: EARLY B
+
+// TC-4
+// Tests Requirements R3, R5
+// long form command name, long form bus option (Bus), non-existing student
+// expected output: <nothing>
+
+Student: ZEDONG Bus
+
+// TC-5
+// Tests Requirements R3, R6
+// short form command name, existing teacher
+// expected output (multiline):
+// BUSSMANN BILLY
+// BERBES DICK
+// KOZOLA BUSTER
+// MULLINGS LEIGHANN
+// MULGREW RANDELL
+// SARAO DIEDRA
+// LIBRANDI TODD
+// TOWLEY LANE
+// HAVIR BOBBIE
+// WICINSKY TERESE
+// VANCOTT MIKE
+
+T: Hamer
+
+// TC-6
+// Tests Requirements R3, R6
+// long form command name, non-existing teacher
+// expected output: <nothing>
+
+T: GUEVARA
+
+// TC-7
+// Tests Requirements R3, R8
+// short form command name, non-empty bus
+// expected output (multiline):
+// EARLY TORY 3 107
+// ELHADDAD SHANTE 3 107
+// KEMERER ROSETTA 6 102
+// OBREIN STAN 6 111
+// COOKUS XUAN 3 107
+// SARAO DIEDRA 2 108
+// CORONADO DIMPLE 6 102
+// IMMERMAN DEVIN 4 105
+
+B: 52
+
+// TC-8
+// Tests Requirements R3, R8
+// long form command name, empty bus
+// expected output: <nothing>
+
+Bus: 8008
+
+// TC-9
+// Tests Requirements R3, R9
+// short form command name, non-empty grade, (no High/Low modifier)
+// expected output (mutiline):
+// BUSSMANN BILLY
+// BERBES DICK
+// KOZOLA BUSTER
+// MULLINGS LEIGHANN
+// MULGREW RANDELL
+// SARAO DIEDRA
+// LIBRANDI TODD
+// TOWLEY LANE
+// HAVIR BOBBIE
+// WOOLERY NOLAN
+// WICINSKY TERESE
+// VANCOTT MIKE
+// VILARDO EMMANUEL
+
+G: 2
+
+// TC-10
+// Tests Requirements R3, R9
+// long form command name, empty grade, (no High/Low modifier)
+// expected output: <nothing>
+
+Grade: 14
+
+// TC-11
+// Tests Requirements R3, R9
+// short form command name, non-empty grade, High modifier
+// expected output: LAMKIN TAMA 3.23 NISTENDIRK NANCY 55
+
+G: 6 High
+
+// TC-12
+// Tests Requirements R3, R9
+// long form command name, empty grade, H modifier
+// expected output: <nothing>
+
+Grade: 69 H
+
+// TC-13
+// Tests Requirements R3, R9
+// short form command name, empty grade, Low modifier
+// expected output: <nothing>
+
+Grade: 69 Low
+
+// TC-14
+// Tests Requirements R3, R9
+// short form command name, non-empty grade, L modifier
+// expected output: KOZOLA BUSTER 2.76 HAMER GAVIN 55
+
+G: 2 L
+
+// TC-15
+// Tests Requirements R3, R10
+// short form command name, non-empty grade
+// expected output: 6 2.9771428571428578
+
+A: 6
+
+// TC-16
+// Tests Requirements R3, R10
+// long form command name, empty grade
+// expected output: <nothing>
+
+Average: 6000
+
+// TC-17
+// Tests Requirements R3, R11
+// short form command name
+// expected output (multiline):
+// 0: 0
+// 1: 2
+// 2: 13
+// 3: 9
+// 4: 15
+// 5: 0
+// 6: 21
+
+I
+
+// TC-18
+// Tests Requirements R3, R11
+// long form command name
+// expected output (multiline):
+// 0: 0
+// 1: 2
+// 2: 13
+// 3: 9
+// 4: 15
+// 5: 0
+// 6: 21
+
+Info
+
+// TC-19
+// Tests Requirements R3, R13
+// long form command name (quit)
+// expected output: program terminates
+
+QUIT
+
+// TC-20
+// Tests Requirements R3, R13
+// short form command name (quit)
+// expected output: program terminates
+
+Q
