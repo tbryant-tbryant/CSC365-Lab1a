@@ -1,3 +1,6 @@
+import fileinput
+
+
 def main():
     try:
         f = open("students.txt", "r")
@@ -5,6 +8,7 @@ def main():
         print("No file 'students.txt' found.")
         quit()
     tableset = formatData(f)
+    f.close()
     initiatePrompt(tableset)
 
 
