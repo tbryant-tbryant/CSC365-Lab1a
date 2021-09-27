@@ -3,6 +3,7 @@ def main():
         f = open("students.txt", "r")
     except(FileNotFoundError):
         print("No file 'students.txt' found.")
+        quit()
     tableset = formatData(f)
     initiatePrompt(tableset)
 
@@ -20,7 +21,11 @@ TEACHER_FIRST = 7  # STRING
 def formatData(file):
     tableset = set([])
     for line in file.readlines():
-        tableset.add(tuple([item.strip() for item in line.split(",")]))
+        splitline = tuple([item.strip() for item in line.split(",")])
+        if len(splitline) != 8:
+            print("Incorrect file format for 'students.txt'")
+            quit()
+        tableset.add(splitline)
     return tableset
 
 
