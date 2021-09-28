@@ -178,7 +178,7 @@ Info
 // long form command name (quit)
 // expected output: program terminates
 
-QUIT
+Quit
 
 // TC-20
 // Tests Requirements R3, R13
